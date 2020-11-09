@@ -1,0 +1,59 @@
+version: '3.5'
+services:
+  fuseki:
+    image: stain/jena-fuseki:3.10.0
+    container_name: fuseki-workbench
+    volumes:
+      - ./data/fuseki:/fuseki
+      - ./data/staging:/staging
+    ports:
+      - "3030:3030"
+    expose:
+      - "3030"
+    networks:
+      - semapps
+    environment:
+      ADMIN_PASSWORD: "admin"
+  middleware:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: middleware-workbench
+    depends_on:
+      - fuseki
+    volumes:
+      - ./server/:/server/app
+    environment:
+      - SEMAPPS_SPARQL_ENDPOINT=http://fuseki-workbench:3030/
+      - SEMAPPS_MAIN_DATASET=localData
+      - SEMAPPS_JENA_USER=admin
+      - SEMAPPS_JENA_PASSWORD=admin
+      - SEMAPPS_HOME_URL=http://localhost:3000/
+    networks:
+      - semapps
+    ports:
+      - "3000:3000"
+    expose:
+      - "3000"
+    command: bash -c "npm rebuild && npm install && npm start"
+  frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
+    container_name: frontend-workbench
+    volumes:
+      - ./client:/client/app
+    environment:
+      - REACT_APP_MIDDLEWARE_URL=http://localhost:3000/
+      - PORT=5000
+    networks:
+      - semapps
+    ports:
+      - "5000:5000"
+    expose:
+      - "5000"
+    command: bash -c "npm rebuild && npm install --silent && npm start"
+
+networks:
+  semapps:
+    name: semapps_network
