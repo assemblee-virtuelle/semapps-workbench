@@ -1599,10 +1599,10 @@
   resolved "https://registry.yarnpkg.com/@redux-saga/types/-/types-1.1.0.tgz#0e81ce56b4883b4b2a3001ebe1ab298b84237204"
   integrity sha512-afmTuJrylUU/0OtqzaRkbyYFFNgCF73Bvel/sw90pvGrWIZ+vyoIJqA6eMSoA6+nb443kTmulmBtC9NerXboNg==
 
-"@semapps/react-admin@0.1.3":
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/@semapps/react-admin/-/react-admin-0.1.3.tgz#66823a5df12d6569afb703501002cdc8cbbf002e"
-  integrity sha512-hM/2F93qa7vFML7SLeZ6vxTjluN6wXEmn+tgS03ZoAF7A74Naj6tuCo/sAoDsZb7Un6Ulh5S1JpBn1tDBJHCrw==
+"@semapps/react-admin@0.1.8":
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/@semapps/react-admin/-/react-admin-0.1.8.tgz#ffd9187b0c264cffe915192d008d703bd639296d"
+  integrity sha512-neqS8W7JSWTJaNJVTU43PAZ1vkYeEHVRQm/iTTM4yvRc88Jj0STBS4jxksc3J+T7McDyJLqIqkK0geIuk0ivLg==
   dependencies:
     final-form-calculate "^1.3.1"
     jsonld "^3.0.1"
