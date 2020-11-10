@@ -8,7 +8,8 @@ install :
 
 rollup :
 	npm run dev --prefix $(SEMAPPS_PATH)/src/frontend/packages/archipelago-layout &
-	npm run dev --prefix $(SEMAPPS_PATH)/src/frontend/packages/archipelago-layout
+	npm run dev --prefix $(SEMAPPS_PATH)/src/frontend/packages/semantic-data-provider 
+
 link:
 	cd $(SEMAPPS_PATH)/src/frontend/packages/archipelago-layout && npm link
 	npm link @semapps/archipelago-layout

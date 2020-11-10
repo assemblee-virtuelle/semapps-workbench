@@ -10,9 +10,12 @@ link:
 
 
 link-yarn:
-
+	cd $(SEMAPPS_PATH)/src/middleware/packages/ldp && yarn link
+	yarn link @semapps/ldp
 
 unlink:
 
 
 unlink-yarn:
+	yarn unlink @semapps/ldp--no-save
+	cd $(SEMAPPS_PATH)/src/middleware/packages/ldp && yarn unlink

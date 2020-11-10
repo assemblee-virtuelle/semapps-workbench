@@ -38,13 +38,13 @@ docker-start-dev:
 	$(DOCKER_COMPOSE_DEV) up -d --force-recreate
 
 log:
-	$(DOCKER_COMPOSE) logs -f middleware frontend fuseki
+	$(DOCKER_COMPOSE) logs -f middleware frontend
 
 log-prod:
-	$(DOCKER_COMPOSE_PROD) logs -f middleware frontend fuseki
+	$(DOCKER_COMPOSE_PROD) logs -f middleware frontend traefik
 
 log-dev:
-	$(DOCKER_COMPOSE_PROD) logs -f middleware frontend fuseki traefik
+	$(DOCKER_COMPOSE_PROD) logs -f middleware frontend
 
 
 start: docker-start
@@ -76,18 +76,21 @@ install :
 	cd ./server && make install
 
 server-init :
+	npm install -g moleculer-cli
 	moleculer init assemblee-virtuelle/semapps-template-ldp server --no-install --answers ./answers.json
+	cp MakefileServer ./server/Makefile
+	cp DockerfileServer ./server/Dockerfile
+	cd ./server && make install
 
 client-init :
-	npx create-react-app client --template @semapps/dms --no-install
+	npx create-react-app client --template @semapps/dms-archipelago --no-install
+	cp MakefileClient ./client/Makefile
+	cp DockerfileClient.dev ./client/Dockerfile.dev
+	cp DockerfileClient.prod ./client/Dockerfile.prod
 
 init :
-	npm install -g moleculer-cli
 	make server-init
 	make client-init
-	make make-init
-	make docker-init
-	make install
 
 build:docker-build
 
